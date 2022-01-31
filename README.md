@@ -1,2 +1,2 @@
-# wk5-weekly-planner
-Weekly Planner
+# wk5-daily-planner
+Daily Planner
