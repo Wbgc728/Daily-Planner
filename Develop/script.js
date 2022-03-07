@@ -21,9 +21,6 @@ var hourSpan;
 
 var interval = setInterval(function() {
     var momentNow = moment();
-    $('#currentDay').html(momentNow.format('YYYY MMMM DD') + ' ' +
-        momentNow.format('dddd')
-        .substring(0, 3).toUpperCase());
     $('#currentDay').html(currentDate + " " + momentNow.format('hh:mm:ss A'));
 }, 100);
 
@@ -32,6 +29,7 @@ var interval = setInterval(function() {
 function initialize() {
 
     console.log("Current Hour " + hour);
+
     var hour9 = JSON.parse(localStorage.getItem("09:00 am"));
     nineA.val(hour9);
 
@@ -65,15 +63,15 @@ function initialize() {
 function background() {
 
     $(".form-control").each(function() {
-        var timeTest = parseInt($(this).attr("id"));
+        var timeCheck = parseInt($(this).attr("id"));
         hour = parseInt(hour);
-        console.log(timeTest);
+        console.log(timeCheck);
         console.log(hour);
 
 
-        if (hour > timeTest) {
+        if (hour > timeCheck) {
             $(this).addClass("past");
-        } else if (hour < timeTest) {
+        } else if (hour < timeCheck) {
             $(this).addClass("future");
         } else {
             $(this).addClass("present");
@@ -86,7 +84,8 @@ $(document).ready(function() {
     background()
 
     // Save Buttons for local storage
-    $(".saveBtn").on("click", function() {
+    $(".saveBtn").on("click", function(event) {
+        event.preventDefault();
         userInput = $(this).siblings(".form-control").val().trim();
         console.log(userInput);
         hourSpan = $(this).siblings(".input-group-prepend").text().trim();
